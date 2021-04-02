@@ -1,4 +1,4 @@
-const fs = require('fs')//changes
+const fs = require('fs')
 
 const addNote = (name,subject,grade,comment)=>{
     const notes = loadNotes()//returns array
@@ -36,24 +36,24 @@ const saveNotes = (notes)=>{//notes from loadNotes()
 
 const removeNotes = (name)=>{
     const notes = loadNotes()
-    const notesKeep = notes.filter((note)=>{
+    const notesKeep = notes.filter((note)=>{//used filter to compare object name of note to the name inserted after the command and check if they arent equal, then return array without the name entered which will make removeNotes() work and create a new array in notes.json file
         return note.name !== name
     })
     saveNotes(notesKeep)
     console.log('Note removed!')
 }
-const listNotes = ()=>{
+const listNotes = ()=>{ //it wont take any entries as it just shows list of object names in the array in notes.json by looping every object and show the name
     const notes = loadNotes()
     notes.forEach(note => {
         console.log(note.name)
     });
 }
-const readNotes = (name)=>{
+const readNotes = (name)=>{//its a query by just name to show all content related to the name, so no need to other arguments
     const notes = loadNotes()
-    const note =  notes.find(note=>{
+    const note =  notes.find(note=>{//find() id method to return first value of objects name that entered and compare it with name in the argumrnts
         return note.name === name
     })
-    if(note){
+    if(note){//This means if object "note" exists then execute some code
         console.log(`Name: '${note.name}'
         Subject: '${note.subject}'
         Grade:'${note.grade}'
